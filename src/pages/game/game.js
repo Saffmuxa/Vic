@@ -224,17 +224,18 @@ const cardClose = () => {
   });
   nextBtn.classList.add("disable");
   replacer();
+  bag();
 };
 answersCorrect.forEach((el) => {
   el.addEventListener("click", () => {
     answerCorrectFunc(el);
-    bag();
+    // bag();
   });
 });
 answersInCorrect.forEach((el) => {
   el.addEventListener("click", () => {
     answerInCorrectFunc(el);
-    bag();
+    // bag();
   });
 });
 const answerCorrectFunc = (el) => {

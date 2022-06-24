@@ -363,8 +363,8 @@ body {
 }
 .question {
   font-size: 66px;
-  display: flex;
-  align-items: center;
+  display: block;
+  // align-items: center;
   // height: 100%;
 }
 .questionWindow__wrap {
