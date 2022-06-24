@@ -1,0 +1,195 @@
+extends ../layout
+
+append style
+  link(rel='stylesheet' href=require('./game.scss'))
+
+append script
+  script(src=require('./game.js'))
+  
+
+block content
+  -const column = [100, 200, 300, 400, 500];
+  -const blockName = ['Люди', 'Книги', 'Музыка', 'Истории', 'Истории22'];
+
+  .game
+    .board-wrapper
+      .board
+        .main-board
+          .expanding-block(style='opacity: 1.0;')
+            .question(style='transform: translateX(0%);')
+              .content-wrap
+            .answer(style='transform: translateX(0%);')
+              .content-wrap
+          h2 Какая то игра
+          .game-grid
+            .game-column
+              .title.js-title=blockName[0]
+              .question-button-wrapper
+                .question-button(data-score=column[0], qnumber=1).js-firstRow
+                  span.dollar $
+                  =column[0]
+              .question-button-wrapper
+                .question-button(data-score=column[1] qnumber=2).js-firstRow
+                  span.dollar $
+                  =column[1]
+              .question-button-wrapper
+                .question-button(data-score=column[2] qnumber=3).js-firstRow
+                  span.dollar $
+                  =column[2]
+              .question-button-wrapper
+                .question-button(data-score=column[3] qnumber=4).js-firstRow
+                  span.dollar $
+                  =column[3]
+              .question-button-wrapper
+                .question-button(data-score=column[4] qnumber=5).js-firstRow
+                  span.dollar $
+                  =column[4]
+            .game-column
+              .title.js-title=blockName[1]
+              .question-button-wrapper
+                .question-button(data-score=column[0]).js-secondRow
+                  span.dollar $
+                  =column[0]
+              .question-button-wrapper
+                .question-button(data-score=column[1]).js-secondRow
+                  span.dollar $
+                  =column[1]
+              .question-button-wrapper
+                .question-button(data-score=column[2]).js-secondRow
+                  span.dollar $
+                  =column[2]
+              .question-button-wrapper
+                .question-button(data-score=column[3]).js-secondRow
+                  span.dollar $
+                  =column[3]
+              .question-button-wrapper
+                .question-button(data-score=column[4]).js-secondRow
+                  span.dollar $
+                  =column[4]
+            .game-column
+              .title.js-title=blockName[2]
+              .question-button-wrapper
+                .question-button(data-score=column[0]).js-thirdRow
+                  span.dollar $
+                  =column[0]
+              .question-button-wrapper
+                .question-button(data-score=column[1]).js-thirdRow
+                  span.dollar $
+                  =column[1]
+              .question-button-wrapper
+                .question-button(data-score=column[2]).js-thirdRow
+                  span.dollar $
+                  =column[2]
+              .question-button-wrapper
+                .question-button(data-score=column[3]).js-thirdRow
+                  span.dollar $
+                  =column[3]
+              .question-button-wrapper
+                .question-button(data-score=column[4]).js-thirdRow
+                  span.dollar $
+                  =column[4]
+            .game-column
+              .title.js-title=blockName[3]
+              .question-button-wrapper
+                .question-button(data-score=column[0]).js-fourthRow
+                  span.dollar $
+                  =column[0]
+              .question-button-wrapper
+                .question-button(data-score=column[1]).js-fourthRow
+                  span.dollar $
+                  =column[1]
+              .question-button-wrapper
+                .question-button(data-score=column[2]).js-fourthRow
+                  span.dollar $
+                  =column[2]
+              .question-button-wrapper
+                .question-button(data-score=column[3]).js-fourthRow
+                  span.dollar $
+                  =column[3]
+              .question-button-wrapper
+                .question-button(data-score=column[4]).js-fourthRow
+                  span.dollar $
+                  =column[4]
+            .game-column
+              .title.js-title.js-title=blockName[4]
+              .question-button-wrapper
+                .question-button(data-score=column[0]).js-fifthRow
+                  span.dollar $
+                  =column[0]
+              .question-button-wrapper
+                .question-button(data-score=column[1]).js-fifthRow
+                  span.dollar $
+                  =column[1]
+              .question-button-wrapper
+                .question-button(data-score=column[2]).js-fifthRow
+                  span.dollar $
+                  =column[2]
+              .question-button-wrapper
+                .question-button(data-score=column[3]).js-fifthRow
+                  span.dollar $
+                  =column[3]
+              .question-button-wrapper
+                .question-button(data-score=column[4]).js-fifthRow
+                  span.dollar $
+                  =column[4]
+             
+      .questionWindow.js-questionWindow
+        .questionWindow__wrap
+          .questionWindow__qnum
+            h1.question.js-question Вопрос номер 
+          .questionWindow__text-wrap
+              p.question__text.js-question__text Вопрос  текст
+              .bag-div.js-bag-div.invisible
+                include ./bag.pug
+          button.questionWindow__vars.js-questionWindow__vars-btn
+            span.js-questionWindow__vars Верный ответ
+
+          
+    .teams.js-teams
+      
+      //- .team.team-1
+      //-   .team-1__name 
+      //-     span.name.js-team-1__name text 
+      //-   .board
+      //-     .score-board
+      //-       .the-score
+      //-         | $
+      //-         span.dollar.js-score1 0
+      //-     .answer-board.js-answer-board.disable
+      //-       button.correct.js-correct1
+      //-       button.incorrect.js-incorrect1
+      include ./time.pug
+      //- .team.team-2
+      //-   .team-2__name 
+      //-     span.name.js-team-2__name text 
+      //-   .board
+      //-     .score-board
+      //-       .the-score
+      //-         | $
+      //-         span.dollar.js-score2 0
+      //-     .answer-board.js-answer-board.disable
+      //-       button.correct.js-correct2
+      //-       button.incorrect.js-incorrect2
+      
+
+        
+  //- .left.see-answer-button(style='transform: translateX(-110%);')
+  //-     | SEE
+  //-     br
+  //-     | ANSWER
+  //-   .right.see-answer-button(style='transform: translateX(110%);')
+  //-     | SEE
+  //-     br
+  //-     | ANSWER
+  //-   .left.continue-button(style='transform: translateX(-110%);') CONTINUE
+  //-   .right.continue-button(style='transform: translateX(110%);') CONTINUE
+  //-   .informations
+  //-     div(data-info='1-1')
+  //-       .question
+  //-         .text THIS VISIONARY LEAD THE CIVIL RIGHTS MOVEMENT
+  //-       .answer
+  //-         .text MARTIN LUTHER KING, JR.
+  //-         .image
+  //-           img(src='https://jhcheslik.com/img/mlkjr.jpg')
+
+        

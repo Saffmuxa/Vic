@@ -1,0 +1,31 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "Simple web app",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack --mode=production --progress",
+    "watch": "webpack --mode=production --watch --progress"
+  },
+  "devDependencies": {
+    "@webdiscus/pug-loader": "^2.0.0",
+    "air-datepicker": "^3.2.0",
+    "autoprefixer": "^10.4.4",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "css-url-relative-plugin": "^1.1.0",
+    "cssnano": "^5.1.7",
+    "inputmask": "^5.0.7",
+    "jquery": "^3.6.0",
+    "nouislider": "^15.6.0",
+    "postcss-loader": "^6.2.1",
+    "pug-plugin": "^2.2.0",
+    "sass": "^1.50.0",
+    "sass-loader": "^12.6.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1",
+    "wnumb": "^1.2.0"
+  }
+}

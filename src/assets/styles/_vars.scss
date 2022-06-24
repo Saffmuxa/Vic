@@ -1,0 +1,37 @@
+$mainFont: "Montserrat", Arial, sans-serif;
+$materialFont: "Material Icons";
+// Size
+$mainFontSize: 0.875rem; //14px от 16 браузерных
+$mainFontWeight: 400;
+$mainLineHeight: $mainFontSize * 1.714;
+$mainFontStyle: normal;
+$mainFontColorActive: rgba(31, 32, 65, 1);
+$mainFontColor: rgba(31, 32, 65, 0.75);
+$mainFontColor05: rgba(31, 32, 65, 0.5);
+$mainFontColor025: rgba(31, 32, 65, 0.25);
+$mainFontColor005: rgba(31, 32, 65, 0.05);
+
+$maxWidth: 1440px; //вариант 1920px
+$smDesktopWidth: 980px;
+$tableWidth: 768px;
+$phoneWidth: 480px;
+$smPhoneWidth: 320px;
+
+// Main colors
+$mainColor: #1f2041;
+$purple: #bc9cff;
+$green: #6fcf97;
+$white: #ffff;
+$greyBG: rgba(244, 244, 246, 1);
+$mainBackground: #ffffff;
+$gradient: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+$gradient05: linear-gradient(180deg, #bb9cff70 0%, #8ba4f970 100%);
+$gradientGreen: linear-gradient(180deg, #6fcf97 0%, #66d2ea 100%);
+// Neutral Color
+// $neutral-primary: #303133;
+// $neutral-regular: #606266;
+// $neutral-secondary: #909399;
+// $neutral-placeholder: #c0c4cc;
+
+// Animation time
+$aniTime: 300ms;

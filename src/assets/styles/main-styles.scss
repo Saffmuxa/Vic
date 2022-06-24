@@ -1,0 +1,221 @@
+@import "./reset";
+@import "./fonts";
+@import "./vars";
+
+html {
+  height: 100%;
+}
+body,
+input {
+  height: 100%;
+  background-color: $mainBackground;
+  font-family: $mainFont;
+  font-style: $mainFontStyle;
+  font-weight: $mainFontWeight;
+  font-size: $mainFontSize;
+  line-height: $mainLineHeight;
+  color: $mainFontColor;
+  text-overflow: ellipsis;
+}
+input {
+  line-height: 24px;
+  height: 44px;
+  width: 100%;
+  margin-top: 1px;
+  padding: 0px 14px 1px 14px;
+  background-color: rgba(31, 32, 65, 0);
+  border: 1px solid rgba(31, 32, 65, 0.25);
+  border-radius: 4px;
+  &:focus {
+    border: 1px solid rgba(31, 32, 65, 0.5);
+    color: rgba(31, 32, 65, 0.75);
+  }
+  &:hover {
+    animation: border-change $aniTime ease forwards;
+    color: rgba(31, 32, 65, 0.75);
+  }
+  &::placeholder {
+    color: rgba(31, 32, 65, 0.25);
+  }
+}
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+button {
+  cursor: pointer;
+  background-color: $mainBackground;
+  font-family: $mainFont;
+  color: rgba(31, 32, 65, 0.5);
+  font-size: 18px;
+  line-height: 22px;
+}
+h1 {
+  font-weight: 700;
+  font-size: 1.5rem; //24px
+  line-height: 29px;
+  color: rgba(31, 32, 65, 1);
+}
+h2 {
+  font-weight: 700;
+  font-size: 1.1875rem; //19px
+  line-height: 23px;
+  color: rgba(31, 32, 65, 1);
+}
+h3,
+label {
+  font-weight: 700;
+  font-size: 0.75rem; //12px при 16 браузерных
+  line-height: 15px;
+  text-transform: uppercase;
+  color: rgba(31, 32, 65, 1);
+}
+
+a {
+  color: rgba(31, 32, 65, 0.5);
+  font-weight: normal;
+  text-transform: none;
+  line-height: 17px;
+  &:hover {
+    animation: color-change $aniTime ease forwards;
+    // color: rgba(31, 32, 65, 1);
+  }
+}
+
+.wrapper {
+  max-width: $maxWidth;
+  // overflow: hidden;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+#app-root {
+  flex: 1 0 auto;
+}
+
+//для вариантов input
+.subscribtion {
+  display: flex;
+  max-width: 267px;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  input {
+    position: relative;
+    // width: 100%;
+    padding-bottom: 2px;
+  }
+  button {
+    position: absolute;
+    margin: 0px 7px 4px 0px;
+  }
+}
+
+.check-mark {
+  right: 14px;
+  padding: 2px;
+  transform: rotate(0deg);
+  transition: transform 200ms ease-in-out;
+  background-color: #fff;
+}
+.active {
+  .check-mark {
+    transform: rotate(180deg);
+    transition: transform 200ms ease-in-out;
+  }
+
+  input {
+    border: 1px solid rgba(31, 32, 65, 0.5);
+    color: rgba(31, 32, 65, 0.75);
+    border-radius: 4px 4px 0px 0px;
+  }
+}
+
+.dropdown-toggle,
+.dropdown-toggle__mid,
+.dropdown-toggle__short {
+  background-color: $mainBackground;
+
+  &:focus {
+    // border: 1px solid rgba(31, 32, 65, 0.5);
+    // border-radius: 4px 4px 0px 0px;
+  }
+}
+.dropdown-toggle__short {
+  max-width: 150px;
+}
+.dropdown-toggle__mid {
+  max-width: 267px;
+}
+
+.date-field {
+  color: rgba(31, 32, 65, 0.25);
+  text-transform: uppercase;
+}
+.date-dropdown {
+  position: absolute;
+  // width: 150px;
+  overflow: hidden;
+  &.active img {
+    transform: rotate(180deg);
+    transition: transform 200ms ease-in-out;
+  }
+  .date-dropdown_input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    // width: 150px;
+  }
+  img {
+    position: absolute;
+    right: 15px;
+    // padding-right: 6px;
+    transform: rotate(0deg);
+    transition: transform 200ms ease-in-out;
+  }
+  input {
+    // text-transform: uppercase;
+    // width: 150px;
+
+    display: inline-block;
+  }
+}
+
+.arrow::after {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  content: "expand_more";
+  color: rgb(31 32 65 / 50%);
+  font-family: $materialFont;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 44px;
+  transform: rotate(0deg);
+  transition: transform $aniTime ease-in-out;
+  margin-top: 1px;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes color-change {
+  0% {
+  }
+  100% {
+    color: rgba(31, 32, 65, 1);
+  }
+}
+@keyframes border-change {
+  0% {
+  }
+  100% {
+    border: 1px solid rgba(31, 32, 65, 0.5);
+  }
+}
