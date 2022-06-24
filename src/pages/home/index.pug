@@ -9,22 +9,23 @@ append script
 block content
 
   main.main-content
-    h1.title Какая то игра!
-    //- #app-root
-      //- The dynamic content compiled at runtime in JavaScript.
+    .title-form
+      h1.title Какая то игра!
+      //- #app-root
+        //- The dynamic content compiled at runtime in JavaScript.
 
-    //- #static-content
-    form(action='game.html' method="get").start-game
-      .btns
-        button.js-btn-down.btn-home.dsbl(type="button") -1
-        .output
-        button.js-btn-up.btn-home(type="button") +1
-      .start-inputs
-        .inputs
-         input.main-menu_group1-name(name="name" placeholder='Введите название команды' required)
-        //- input.main-menu_group1-name(name="name" placeholder='Введите название второй команды' required)
-        input.main-menu_group1-timer(name="time" placeholder='Время на вопрос (сек)' type='number' required)
-      button(type="submit").main-menu Start Game
+      //- #static-content
+      form(action='game.html' method="get").start-game
+        .btns
+          button.js-btn-down.btn-home.dsbl(type="button") -1
+          .output
+          button.js-btn-up.btn-home(type="button") +1
+        .start-inputs
+          .inputs
+          input.main-menu_group1-name(name="name" placeholder='Введите название команды' required)
+          //- input.main-menu_group1-name(name="name" placeholder='Введите название второй команды' required)
+          input.main-menu_group1-timer(name="time" placeholder='Время на вопрос (сек)' type='number' required)
+        button(type="submit").main-menu Start Game
             
     .rules  
       h2 Немного подсказок:
