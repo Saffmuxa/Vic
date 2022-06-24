@@ -5,7 +5,7 @@ const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const isProduction = false;
+const isProduction = true;
 module.exports = {
   mode: isProduction ? "production" : "development",
   devtool: isProduction ? false : "eval-source-map",

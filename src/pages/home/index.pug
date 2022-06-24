@@ -7,9 +7,9 @@ append script
   script(src=require('./main.js'))
 
 block content
-  h1.title Какая то игра!
 
   main.main-content
+    h1.title Какая то игра!
     //- #app-root
       //- The dynamic content compiled at runtime in JavaScript.
 
@@ -24,7 +24,14 @@ block content
          input.main-menu_group1-name(name="name" placeholder='Введите название команды' required)
         //- input.main-menu_group1-name(name="name" placeholder='Введите название второй команды' required)
         input.main-menu_group1-timer(name="time" placeholder='Время на вопрос (сек)' type='number' required)
-
       button(type="submit").main-menu Start Game
             
+    .rules  
+      h2 Немного подсказок:
+      ol(type="a")
+        li При выборе вопроса - открывается наименование выбранной категории
+        li После прочтения вопроса необходимо дать ответ как можно быстрее
+        li Если команда отвечает неверно, очки отнимаются и дается возможность ответить другим командам 
+        li Команды могут не отвечать после неверного ответа оппонента 
+        li Активация кнопок "правильного" и "неправильного" ответов происходит после истечения времени, нажатию на Space или щелчка по самому таймеру
         

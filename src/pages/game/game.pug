@@ -141,8 +141,11 @@ block content
               p.question__text.js-question__text Вопрос  текст
               .bag-div.js-bag-div.invisible
                 include ./bag.pug
-          button.questionWindow__vars.js-questionWindow__vars-btn
-            span.js-questionWindow__vars Верный ответ
+          .btns
+            button.questionWindow__vars.quest-btn.js-questionWindow__vars-btn.disable
+              span.js-questionWindow__vars Верный ответ
+            button.js-questionWindow__next.next.questionWindow__vars.disable
+              span.js-questionWindow__next Далее
 
           
     .teams.js-teams

@@ -83,7 +83,7 @@ body {
     // height: 2vw;
     // text-align: center;
     opacity: 0;
-    cursor: pointer;
+    // cursor: pointer;
     border: 1px solid #fbed56;
     border-radius: 6px;
     height: 100%;
@@ -91,7 +91,7 @@ body {
   .title_active {
     opacity: 1;
     transition: all 1s;
-    cursor: auto;
+    // cursor: auto;
   }
 
   .question-button-wrapper {
@@ -386,11 +386,9 @@ body {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
 }
-// .questionWindow__answers {
-//   display: flex;
-//   flex-direction: column;
-//   font-size: 64px;
-// }
+.quest-btn {
+  width: 65vw;
+}
 .questionWindow__vars {
   display: flex;
   align-items: center;
@@ -399,12 +397,20 @@ body {
   border: 1px solid rgb(10, 10, 4);
   border-radius: 20px;
   font-size: 4 * $mainFontSize;
-  background-color: rgb(193, 222, 197);
+  // background-color: rgb(193, 222, 197);
+  background: $gradientGreen;
 }
 .bag-div {
-  // display: none;
+  align-items: center;
+  flex-direction: column;
   display: flex;
   justify-content: center;
+  max-height: 450px;
+  img {
+    margin-top: 3vh;
+    max-width: 100%;
+    max-height: 45vh;
+  }
 }
 .invisible {
   display: none;
@@ -430,4 +436,12 @@ body {
   // opacity: 0;
   pointer-events: none;
   cursor: auto;
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
+  grid-row: 3/4;
+}
+.next {
+  background: $gradient05;
 }

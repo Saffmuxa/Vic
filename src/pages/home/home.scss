@@ -1,15 +1,36 @@
+@import "../../assets/styles/_vars.scss";
+
 .title {
   display: flex;
   justify-content: center;
+  font-size: 64px;
 }
 .main-content {
-  // display: block;
-  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   width: 500px;
   margin: auto;
 }
 .main-menu {
   font-size: 40px;
+  margin: 50px;
+
+  height: 50px;
+  background: linear-gradient(#fff, #fff) padding-box, $gradient border-box;
+  border: 2px solid transparent;
+  border-radius: 22px;
+  min-width: 100px;
+  transition: all 300ms;
+  color: $purple;
+  padding: 0px 11px;
+  opacity: 0.8;
+}
+.main-menu:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  transition: all 300ms;
 }
 .btn-home {
   border: 1px solid rgb(96, 88, 88);
@@ -53,4 +74,13 @@
   display: flex;
   flex-direction: column;
   row-gap: 40px;
+}
+ol {
+  li {
+    list-style-type: inherit;
+  }
+}
+.rules {
+  // margin-top: 50px;
+  width: 800px;
 }
