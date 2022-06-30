@@ -12,7 +12,7 @@ const timer = sessionStorage.getItem("timer");
 // const teams = names.slice(0, -1);
 console.log(questions);
 const teamJS =
-  '<div class="team js-team"><div class="team__name"><span class="name js-team__name">text </span></div><div class="board"><div class="score-board"><div class="the-score">$<span class="dollar js-score">0</span></div></div><div class="answer-board js-answer-board disable"><button class="correct js-correct"></button><button class="incorrect js-incorrect"></button></div></div></div>';
+  '<div class="team js-team"><div class="team__name"><span class="name js-team__name">text </span></div><div class="score-board"><div class="the-score">$<span class="dollar js-score">0</span></div></div><div class="answer-board js-answer-board disable"><button class="correct js-correct"></button><button class="incorrect js-incorrect"></button></div></div>';
 teams.forEach((team) => {
   document.querySelector(".js-teams").insertAdjacentHTML("afterbegin", teamJS);
 });
@@ -272,6 +272,7 @@ const cardClose = () => {
 answersCorrect.forEach((el) => {
   el.addEventListener("click", () => {
     answerCorrectFunc(el);
+    console.log(el);
   });
 });
 answersInCorrect.forEach((el) => {
