@@ -1,27 +1,28 @@
 import { questions } from "./quests.js";
-const names = decodeURIComponent(window.location.search)
-  .replace(/name=/g, "")
-  .replace(/time=/g, "")
-  .replace(/&/g, ", ")
-  .replace("?", "")
-  .split(",");
-const teams = names.slice(0, -1);
+// const names = decodeURIComponent(window.location.search)
+//   .replace(/[name=time?]/g, "")
+//   // .replace(/time=/g, "")
+//   .replace(/&/g, ", ")
+//   // .replace("?", "")
+//   .replace(/[+]/g, " ")
+//   .split(",");
+const teams = JSON.parse(sessionStorage.getItem("names"));
+// const timer = names[names.length - 1];
+const timer = sessionStorage.getItem("timer");
+// const teams = names.slice(0, -1);
+console.log(questions);
 const teamJS =
   '<div class="team js-team"><div class="team__name"><span class="name js-team__name">text </span></div><div class="board"><div class="score-board"><div class="the-score">$<span class="dollar js-score">0</span></div></div><div class="answer-board js-answer-board disable"><button class="correct js-correct"></button><button class="incorrect js-incorrect"></button></div></div></div>';
 teams.forEach((team) => {
-  console.log(team);
   document.querySelector(".js-teams").insertAdjacentHTML("afterbegin", teamJS);
 });
 const teamNames = [...document.querySelectorAll(".js-team__name")];
 teamNames.forEach((teamName, i) => {
-  console.log(teams, i);
   teamName.textContent = teams[i];
 });
 const teamScore = [...document.querySelectorAll(".js-score")];
 const time = document.querySelector(".js-countdown");
 const timeH = document.querySelector(".js-countdown-one");
-const timer = names[names.length - 1];
-console.log(timer);
 const hours = Math.floor(timer / 60);
 let newTimer = 1;
 // const hoursC = Math.floor(newTimer / 60);
@@ -77,13 +78,14 @@ const namesReplace = (newTimer) => {
 };
 replacer();
 const titles = document.querySelectorAll(".js-title");
+const mainBoard = document.querySelector(".js-board");
 const questWindow = document.querySelector(".js-questionWindow");
 const answerBoard = document.querySelectorAll(".js-answer-board");
 const answersCorrect = [...document.querySelectorAll(".js-correct")];
 const answersInCorrect = [...document.querySelectorAll(".js-incorrect")];
 const question = document.querySelector(".js-question");
 const qText = document.querySelector(".js-question__text");
-const themes = [...document.querySelectorAll(".js-title")];
+const qTextContent = document.querySelector(".js-questionWindow__text-wrap");
 const answer = document.querySelector(".js-questionWindow__vars");
 const answerBtn = document.querySelector(".js-questionWindow__vars-btn");
 const nextBtn = document.querySelector(".js-questionWindow__next");
@@ -96,8 +98,7 @@ const fourthTheme = document.querySelectorAll(".js-fourthRow");
 const fifthTheme = document.querySelectorAll(".js-fifthRow");
 const countdown = document.querySelector(".js-countdown-block");
 
-const isQSet = [];
-let secretAnswerAndCoin = ["answer", 0];
+let answerAndCoin = {};
 let btnActivate = () => {
   answerBoard.forEach((commands) => {
     if (commands.classList.contains("disable")) {
@@ -119,17 +120,32 @@ const countFunc = () => {
       tick();
     }
   }, 1000);
-  document.addEventListener("keypress", () => {
-    if (questWindow.classList.contains("active")) {
-      btnActivate();
-      clearInterval(tikTak);
-    }
+  let video = Array.from(document.getElementsByTagName("video"));
+  let audio = Array.from(document.getElementsByTagName("audio"));
+  let content = video.concat(audio);
+  console.log(content);
+  document.addEventListener("keypress", (ev) => {
+    if (ev.code == "Space") {
+      if (questWindow.classList.contains("visible")) {
+        btnActivate();
+        clearInterval(tikTak);
+
+        content.forEach((el) => {
+          if (el === document.activeElement) {
+          } else el.pause();
+        });
+      }
+    } else console.log("нажмите пробел", ev.code);
   });
+
   countdown.addEventListener("click", () => {
     console.log("123");
-    if (questWindow.classList.contains("active")) {
+    if (questWindow.classList.contains("visible")) {
       btnActivate();
       clearInterval(tikTak);
+      content.forEach((el) => {
+        el.pause();
+      });
     }
   });
   nextBtn.addEventListener("click", () => {
@@ -150,7 +166,7 @@ answerBtn.addEventListener("click", () => answerBtnOnClick());
 const answerBtnOnClick = () => {
   answerBtn.classList.add("disable");
   (answer.style.cssText = "opacity: 0; transition: all, 0.2s"),
-    setTimeout(() => (answer.textContent = secretAnswerAndCoin[0]), 200),
+    setTimeout(() => (answer.textContent = answerAndCoin.answer), 200),
     setTimeout(
       () => (answer.style.cssText = "opacity: 1; transition: all, 0.3s"),
       205
@@ -158,66 +174,92 @@ const answerBtnOnClick = () => {
   nextBtn.classList.remove("disable");
 };
 const cardOpen = (el) => {
+  mainBoard.classList.remove("visible");
+  setTimeout(() => {
+    mainBoard.classList.add("invisible");
+    questWindow.classList.remove("invisible");
+  }, 200);
+  setTimeout(() => {
+    questWindow.classList.add("visible");
+  }, 222);
   answer.textContent = "Верный ответ";
-  el.style.cssText = "opacity: 0; transition: all, 0.5s";
-  setTimeout(() => (el.style.cssText = "display: none"), 600);
-  questWindow.classList.add("active");
-  setTimeout(
-    () => (questWindow.style.cssText = "opacity: 1; transition: all, 0.3s"),
-    10
-  );
   answerBtn.classList.add("disable");
+  setTimeout(() => (el.style.cssText = "display: none"), 403);
   let themeIndex = 0;
   let elNum = 0;
   if ([...firstTheme].includes(el)) {
-    themeIndex = 0;
+    themeIndex = questions.firstTheme;
     elNum = [...firstTheme].indexOf(el);
   }
   if ([...secondTheme].includes(el)) {
-    themeIndex = 1;
+    themeIndex = questions.secondTheme;
     elNum = [...secondTheme].indexOf(el);
   }
   if ([...thirdTheme].includes(el)) {
-    themeIndex = 2;
+    themeIndex = questions.thirdTheme;
     elNum = [...thirdTheme].indexOf(el);
   }
   if ([...fourthTheme].includes(el)) {
-    themeIndex = 3;
+    themeIndex = questions.fourthTheme;
     elNum = [...fourthTheme].indexOf(el);
   }
   if ([...fifthTheme].includes(el)) {
-    themeIndex = 4;
+    themeIndex = questions.fifthTheme;
     elNum = [...fifthTheme].indexOf(el);
   }
-  const isQSet = [
-    questions[themeIndex][elNum],
-    questions[themeIndex][elNum + 5],
-    questions[themeIndex][elNum + 10],
-    el.getAttribute("data-score"),
-  ];
-  if (isQSet[1] == "bag") {
-    secretAnswerAndCoin[0] = bagAnswer.textContent;
-    secretAnswerAndCoin[1] = 1000;
+  const iQSet = {
+    name: themeIndex.name,
+    num: themeIndex.questionsNum[elNum],
+    key: themeIndex.key,
+    queText: themeIndex.questionsText[elNum],
+    answer: themeIndex.answers[elNum],
+    coins: el.getAttribute("data-score"),
+  };
+  if (iQSet.queText == "bag") {
+    answerAndCoin.answer = bagAnswer.textContent;
+    answerAndCoin.coin = 1000;
     question.textContent = "Хер в мешке за 1000$!";
     qText.textContent = "";
     bagWindow.classList.remove("invisible");
   } else {
-    question.textContent =
-      isQSet[0] + ". Категория: " + themes[themeIndex].textContent;
-    titles[themeIndex].classList.add("title_active");
-    secretAnswerAndCoin[0] = isQSet[2];
-    secretAnswerAndCoin[1] = isQSet[3];
-    qText.textContent = isQSet[1];
+    question.textContent = iQSet.num + ". Категория: " + iQSet.name;
+    titles[themeIndex.key].classList.add("title_active");
+    titles[themeIndex.key].textContent = iQSet.name;
+    answerAndCoin.answer = iQSet.answer;
+    answerAndCoin.coin = iQSet.coins;
+    qText.textContent = iQSet.queText;
+    const showContent = () => {
+      let temp = document.getElementsByTagName("template")[iQSet.key];
+      let clon = temp.content.cloneNode(true);
+      qTextContent.append(clon);
+      qTextContent
+        .getElementsByClassName("js-quest-content")
+        [elNum].classList.remove("invisible");
+      let content = [...qTextContent.querySelectorAll(".js-quest-content")];
+      content.forEach((el) => {
+        if (el.classList.contains("invisible")) {
+          el.remove();
+        }
+      });
+    };
+    showContent();
   }
-  setTimeout(() => countFunc(), 1000);
+  countFunc();
 };
 const cardClose = () => {
-  console.log("close");
-  questWindow.classList.remove("active");
-  questWindow.style.cssText = "opacity: 0; transition: all, 0.3s";
-  setTimeout(() => questWindow.classList.remove("active"), 300);
-  answerBoard.forEach((commands) => {
-    commands.classList.toggle("disable");
+  questWindow.classList.remove("visible");
+  setTimeout(() => {
+    questWindow.classList.add("invisible");
+    mainBoard.classList.remove("invisible");
+  }, 200);
+  setTimeout(() => {
+    mainBoard.classList.add("visible");
+  }, 222);
+  let content = [...qTextContent.querySelectorAll(".js-quest-content")];
+  content.forEach((el) => {
+    setTimeout(() => {
+      el.remove();
+    }, 100);
   });
   answerBoard.forEach((commands) => {
     commands.classList.add("disable");
@@ -225,33 +267,29 @@ const cardClose = () => {
   nextBtn.classList.add("disable");
   replacer();
   bag();
+  countdown.style.cssText = "color: #fbed56";
 };
 answersCorrect.forEach((el) => {
   el.addEventListener("click", () => {
     answerCorrectFunc(el);
-    // bag();
   });
 });
 answersInCorrect.forEach((el) => {
   el.addEventListener("click", () => {
     answerInCorrectFunc(el);
-    // bag();
   });
 });
 const answerCorrectFunc = (el) => {
   let answersTeamNum = answersCorrect.indexOf(el);
   teamScore[answersTeamNum].textContent =
-    Number(teamScore[answersTeamNum].textContent) +
-    Number(secretAnswerAndCoin[1]);
+    Number(teamScore[answersTeamNum].textContent) + Number(answerAndCoin.coin);
 
   cardClose();
 };
 const answerInCorrectFunc = (el) => {
   let answersTeamNum = answersInCorrect.indexOf(el);
   teamScore[answersTeamNum].textContent =
-    Number(teamScore[answersTeamNum].textContent) -
-    Number(secretAnswerAndCoin[1]);
-  // cardClose();
+    Number(teamScore[answersTeamNum].textContent) - Number(answerAndCoin.coin);
 };
 
 let rows = [firstTheme, secondTheme, thirdTheme, fourthTheme, fifthTheme];

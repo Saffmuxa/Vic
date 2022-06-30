@@ -52,11 +52,13 @@ button {
 }
 h1 {
   font-weight: 700;
-  font-size: 1.5rem; //24px
+  font-size: 2rem; //24px
   line-height: 29px;
   color: rgba(31, 32, 65, 1);
+  transition: all 400ms;
 }
 h2 {
+  transition: all 400ms;
   font-weight: 700;
   font-size: 1.1875rem; //19px
   line-height: 23px;
@@ -64,27 +66,23 @@ h2 {
 }
 h3,
 label {
+  transition: all 400ms;
   font-weight: 700;
   font-size: 0.75rem; //12px при 16 браузерных
   line-height: 15px;
   text-transform: uppercase;
-  color: rgba(31, 32, 65, 1);
+  color: rgba(31, 32, 65, 0.75);
 }
-
-a {
-  color: rgba(31, 32, 65, 0.5);
-  font-weight: normal;
-  text-transform: none;
-  line-height: 17px;
-  &:hover {
-    animation: color-change $aniTime ease forwards;
-    // color: rgba(31, 32, 65, 1);
-  }
+h4 {
+  transition: all 400ms;
+  color: rgba(31, 32, 65, 1);
+  text-transform: uppercase;
+  font-size: 1rem;
 }
 
 .wrapper {
+  min-width: 300px;
   max-width: $maxWidth;
-  // overflow: hidden;
   margin: 0px auto;
   display: flex;
   flex-direction: column;
@@ -217,5 +215,70 @@ a {
   }
   100% {
     border: 1px solid rgba(31, 32, 65, 0.5);
+  }
+}
+@media all and (min-width: 480px) {
+  h1 {
+    font-size: 2.5rem; //24px
+  }
+  h4 {
+    font-size: 1.25rem; //19px
+  }
+  h3,
+  label {
+    font-size: 0.75rem; //12px при 16 браузерных
+  }
+}
+
+@media all and (min-width: 640px) {
+  h1 {
+    font-size: 2.6rem; //24px
+  }
+  h4 {
+    font-size: 1.5rem; //19px
+  }
+  h3,
+  label {
+    font-size: 0.85rem; //12px при 16 браузерных
+  }
+}
+@media all and (min-width: 800px) {
+  h1 {
+    font-size: 2.75rem; //24px
+  }
+
+  h3,
+  label {
+    font-size: 0.95rem; //12px при 16 браузерных
+  }
+}
+@media all and (min-width: 1024px) {
+  h1 {
+    font-size: 3rem; //24px
+  }
+
+  h3,
+  label {
+    font-size: 1rem; //12px при 16 браузерных
+  }
+}
+@media all and (min-width: 1280px) {
+  h1 {
+    font-size: 3.1rem; //24px
+  }
+
+  h3,
+  label {
+    font-size: 1.1rem; //12px при 16 браузерных
+  }
+}
+@media all and (min-width: 1440px) {
+  h1 {
+    font-size: 3.2rem; //24px
+  }
+
+  h3,
+  label {
+    font-size: 1.2rem; //12px при 16 браузерных
   }
 }

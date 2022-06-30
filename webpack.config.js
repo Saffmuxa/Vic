@@ -15,6 +15,8 @@ module.exports = {
     alias: {
       Images: path.join(__dirname, "src/assets/images/"),
       Styles: path.join(__dirname, "src/assets/styles/"),
+      Videos: path.join(__dirname, "src/assets/vid/"),
+      Audio: path.join(__dirname, "src/assets/audio/"),
     },
   },
 
@@ -69,6 +71,28 @@ module.exports = {
           filename: isProduction
             ? "assets/img/[name][ext]"
             : "assets/img/[name][contenthash:8][ext]",
+
+          // filename: 'assets/img/[name].[hash][ext]',
+        },
+      },
+      {
+        test: /\.(mp4|avi|mpeg|gif)/,
+        type: "asset/resource",
+        generator: {
+          filename: isProduction
+            ? "assets/vid/[name][ext]"
+            : "assets/vid/[name][contenthash:8][ext]",
+
+          // filename: 'assets/img/[name].[hash][ext]',
+        },
+      },
+      {
+        test: /\.(mp3|wav|flac|ogg)/,
+        type: "asset/resource",
+        generator: {
+          filename: isProduction
+            ? "assets/audio/[name][ext]"
+            : "assets/audio/[name][contenthash:8][ext]",
 
           // filename: 'assets/img/[name].[hash][ext]',
         },
@@ -136,7 +160,7 @@ module.exports = {
     hints: isProduction ? "error" : "warning",
     // in development mode may be the size of css and js more times bigger than in production
     maxEntrypointSize: isProduction ? 1024000 : 4096000,
-    maxAssetSize: isProduction ? 1024000 : 4096000,
+    maxAssetSize: isProduction ? 1024000 : 8096000,
   },
 
   devServer: {

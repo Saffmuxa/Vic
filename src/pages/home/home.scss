@@ -1,25 +1,31 @@
 @import "../../assets/styles/_vars.scss";
 
 .title {
-  display: flex;
-  justify-content: center;
-  font-size: 64px;
+  margin: 0 auto;
+  grid-row: 1/2;
 }
 .title-form {
-  padding: 2vh 0px;
+  grid-row: 2/3;
+  // max-width: 500px;
 }
 .main-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  width: 500px;
-  margin: auto;
+  padding: 8px 5px;
+  row-gap: 5vh;
+}
+.wrapp {
+  transition: all 400ms;
+  width: 95vw;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5vh;
 }
 .main-menu {
   font-size: 40px;
-  margin: 50px;
-
   height: 50px;
   background: linear-gradient(#fff, #fff) padding-box, $gradient border-box;
   border: 2px solid transparent;
@@ -37,17 +43,17 @@
 }
 .btn-home {
   border: 1px solid rgb(96, 88, 88);
-  height: 20px;
+  // height: 20px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100px;
+  width: 80px;
   height: 40px;
 }
 .btns {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 .dsbl {
@@ -55,11 +61,10 @@
   pointer-events: none;
 }
 .inputs {
-  // height: 216px;
   width: 100%;
-  input {
-    margin: 0px 0px 10px 0px;
-  }
+}
+input {
+  margin: 0px 0px 10px 0px;
 }
 .start-inputs {
   display: flex;
@@ -67,16 +72,15 @@
   align-items: center;
 }
 .output {
-  font-size: 24px;
-  padding: 40px 0px;
+  padding: 0px 5px;
 }
 .main-menu_group1-timer {
-  width: 200px;
+  width: 194px;
 }
 .start-game {
   display: flex;
   flex-direction: column;
-  // row-gap: 1vh;
+  row-gap: 5vh;
 }
 ol {
   li {
@@ -84,6 +88,87 @@ ol {
   }
 }
 .rules {
-  // margin-top: 50px;
-  width: 800px;
+  grid-row: 3/4;
+  transition: all 400ms;
+  margin: 0 auto;
+  text-align: justify;
+}
+.tips {
+  transition: all 400ms;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding-left: 12px;
+}
+@media all and (min-width: 480px) {
+  .wrapp {
+    width: 87vw;
+  }
+  .tips {
+    font-size: 0.85rem;
+    line-height: 1.1rem;
+  }
+  .rules {
+    width: 95vw;
+    color: rgba(31, 32, 65, 0.5);
+  }
+}
+@media all and (min-width: 640px) {
+  .wrapp {
+    width: 72vw;
+  }
+  .tips {
+    font-size: 0.95rem;
+    line-height: 1.3rem;
+  }
+  .rules {
+    width: 90vw;
+  }
+}
+@media all and (min-width: 800px) {
+  .wrapp {
+    width: 57vw;
+  }
+  .tips {
+    font-size: 1.05rem;
+    line-height: 1.4rem;
+  }
+  .rules {
+    width: 80vw;
+  }
+}
+@media all and (min-width: 1024px) {
+  .wrapp {
+    width: 42vw;
+  }
+  .tips {
+    font-size: 1.15rem;
+    line-height: 1.5rem;
+  }
+  .rules {
+    width: 70vw;
+  }
+}
+@media all and (min-width: 1280px) {
+  .wrapp {
+    width: 32vw;
+  }
+  .tips {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+  .rules {
+    width: 60vw;
+  }
+}
+@media all and (min-width: 1440px) {
+  .wrapp {
+    width: 28vw;
+  }
+  .tips {
+    font-size: 1.25rem;
+    line-height: 1.8rem;
+  }
+  .rules {
+    width: 50vw;
+  }
 }
