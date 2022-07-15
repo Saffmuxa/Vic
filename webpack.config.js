@@ -4,16 +4,18 @@ const CssUrlRelativePlugin = require("css-url-relative-plugin");
 const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = true;
 module.exports = {
   mode: isProduction ? "production" : "development",
-  devtool: isProduction ? false : "eval-source-map",
+  devtool: isProduction ? false : "source-map",
 
   resolve: {
     // aliases used in the code example
     alias: {
       Images: path.join(__dirname, "src/assets/images/"),
+      QImages: path.join(__dirname, "src/assets/qimg"),
       Styles: path.join(__dirname, "src/assets/styles/"),
       Videos: path.join(__dirname, "src/assets/vid/"),
       Audio: path.join(__dirname, "src/assets/audio/"),
@@ -36,6 +38,13 @@ module.exports = {
   },
 
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: "src/assets/qimg", to: "assets/img" },
+        { from: "src/assets/audio", to: "assets/audio/" },
+      ],
+      // patterns: [{ from: "src/assets/audio", to: "assets/audio/" }],
+    }),
     new CssUrlRelativePlugin(/* options */),
     // extract HTML from pug files defined by webpack entry
     new PugPlugin({
@@ -63,6 +72,7 @@ module.exports = {
         },
       },
       // image resources processing via require() in pug
+
       {
         test: /\.(png|jpg|jpeg|ico|svg)/,
         exclude: [/fonts/],
@@ -71,8 +81,6 @@ module.exports = {
           filename: isProduction
             ? "assets/img/[name][ext]"
             : "assets/img/[name][contenthash:8][ext]",
-
-          // filename: 'assets/img/[name].[hash][ext]',
         },
       },
       {
@@ -160,7 +168,7 @@ module.exports = {
     hints: isProduction ? "error" : "warning",
     // in development mode may be the size of css and js more times bigger than in production
     maxEntrypointSize: isProduction ? 1024000 : 4096000,
-    maxAssetSize: isProduction ? 1024000 : 8096000,
+    maxAssetSize: isProduction ? 1824000 : 10240000,
   },
 
   devServer: {

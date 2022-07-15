@@ -85,18 +85,78 @@ const answersCorrect = [...document.querySelectorAll(".js-correct")];
 const answersInCorrect = [...document.querySelectorAll(".js-incorrect")];
 const question = document.querySelector(".js-question");
 const qText = document.querySelector(".js-question__text");
+const qTextWrap = document.querySelector(".js-question__text-wrap");
 const qTextContent = document.querySelector(".js-questionWindow__text-wrap");
-const answer = document.querySelector(".js-questionWindow__vars");
-const answerBtn = document.querySelector(".js-questionWindow__vars-btn");
 const nextBtn = document.querySelector(".js-questionWindow__next");
-const bagWindow = document.querySelector(".js-bag-div");
-const bagAnswer = document.querySelector(".js-bag-answer");
 const firstTheme = document.querySelectorAll(".js-firstRow");
 const secondTheme = document.querySelectorAll(".js-secondRow");
 const thirdTheme = document.querySelectorAll(".js-thirdRow");
 const fourthTheme = document.querySelectorAll(".js-fourthRow");
 const fifthTheme = document.querySelectorAll(".js-fifthRow");
 const countdown = document.querySelector(".js-countdown-block");
+const answerBtn2 = document.querySelector(".js-answer-btn");
+const addsImg = document.createElement("img");
+addsImg.className = "js-quest-content";
+const addsVid = document.createElement("iframe");
+addsVid.className = "js-quest-content";
+addsVid.setAttribute("allow", "autoplay");
+addsVid.setAttribute("autoplay", 1);
+
+let iQSet = {
+  name: "name",
+  num: "num",
+  key: "key",
+  queText: "queText",
+  answer: "answer",
+  type: "quest.type",
+  bag: "quest.bag",
+  nameContent: "quest.nameContent",
+  coins: "el.getAttribute",
+};
+const startA = new Audio();
+startA.preload = "auto";
+startA.src = "assets/audio/start.mp3";
+startA.play();
+const audioClick = new Audio();
+audioClick.preload = "auto";
+audioClick.src = "assets/audio/1.mp3";
+
+const audioStop = new Audio();
+audioStop.preload = "auto";
+audioStop.src = "assets/audio/stop.mp3";
+
+const audioQu = new Audio();
+audioQu.preload = "auto";
+audioQu.src = "assets/audio/q.mp3";
+
+const audioQ = () => {
+  audioQu.volume = 0.0;
+  audioQu.currentTime = Number(199 - timer);
+  console.log(audioQu.currentTime);
+  // audioQu.load();
+  audioQu.play();
+  volumeUp();
+};
+let vl = "volume";
+const volumeUp = () => {
+  setTimeout(() => {
+    vl = setInterval(() => {
+      audioQu.volume = audioQu.volume + 0.04;
+      console.log(audioQu.volume, vl);
+      if (audioQu.volume > 0.6) {
+        clearInterval(vl);
+      }
+    }, 400);
+  }, 4000);
+};
+
+const correctAnswer = new Audio();
+correctAnswer.preload = "auto";
+correctAnswer.src = "assets/audio/correct.mp3";
+
+const inCorrectAnswer = new Audio();
+inCorrectAnswer.preload = "auto";
+inCorrectAnswer.src = "assets/audio/incorrect.mp3";
 
 let answerAndCoin = {};
 let btnActivate = () => {
@@ -107,51 +167,72 @@ let btnActivate = () => {
       });
     }
   });
-  answerBtn.classList.remove("disable");
+  // answerBtn.classList.remove("disable");
 };
+let tikTak = "counter";
+// let video = "video";
+// let audio = "audio";
+// let content = "content";
 const countFunc = () => {
   countdown.classList.remove("invisible-but-block");
-  const tikTak = setInterval(() => {
+  tikTak = setInterval(() => {
     if (timeH.textContent == 0 && time.textContent == 0) {
-      btnActivate();
-      clearInterval(tikTak);
       countdown.style.cssText = "color: red";
+      showMeAnswer();
+
+      // audioStop();
     } else {
       tick();
     }
   }, 1000);
-  let video = Array.from(document.getElementsByTagName("video"));
-  let audio = Array.from(document.getElementsByTagName("audio"));
-  let content = video.concat(audio);
-  console.log(content);
-  document.addEventListener("keypress", (ev) => {
-    if (ev.code == "Space") {
-      if (questWindow.classList.contains("visible")) {
-        btnActivate();
-        clearInterval(tikTak);
-
-        content.forEach((el) => {
-          if (el === document.activeElement) {
-          } else el.pause();
-        });
-      }
-    } else console.log("нажмите пробел", ev.code);
-  });
-
-  countdown.addEventListener("click", () => {
-    console.log("123");
+  // video = Array.from(document.getElementsByTagName("video"));
+  // audio = Array.from(document.getElementsByTagName("audio"));
+  // content = video.concat(audio);
+};
+nextBtn.addEventListener("click", () => {
+  clearInterval(tikTak);
+  cardClose();
+});
+countdown.addEventListener("click", () => {
+  if (questWindow.classList.contains("visible")) {
+    showMeAnswer();
+    // content.forEach((el) => {
+    //   el.pause();
+    // });
+  }
+});
+document.addEventListener("keypress", (ev) => {
+  if (ev.code == "Space") {
     if (questWindow.classList.contains("visible")) {
-      btnActivate();
-      clearInterval(tikTak);
-      content.forEach((el) => {
-        el.pause();
-      });
+      showMeAnswer();
+
+      // content.forEach((el) => {
+      //   console.log(el);
+      //   if (el === document.activeElement) {
+      //   } else {
+      //     el.pause();
+      //   }
+      // });
     }
-  });
-  nextBtn.addEventListener("click", () => {
-    clearInterval(tikTak);
-    cardClose();
-  });
+  } else console.log("нажмите пробел", ev.code);
+});
+
+const showMeAnswer = () => {
+  audioQu.pause();
+  btnActivate();
+  clearInterval(tikTak);
+  clearInterval(vl);
+
+  setTimeout(() => {
+    qTextWrap.classList.add("answer-check");
+  }, 500);
+  console.log(nextBtn.classList.contains("disable"));
+  if (nextBtn.classList.contains("disable")) {
+    audioStop.play();
+    console.log("3333");
+    nextBtn.classList.remove("disable");
+  } else {
+  }
 };
 const tick = () => {
   let seconds = Number(timeH.textContent) * 60 + Number(time.textContent);
@@ -159,21 +240,8 @@ const tick = () => {
   namesReplace(newTimer);
 };
 
-const bag = () => {
-  bagWindow.classList.add("invisible");
-};
-answerBtn.addEventListener("click", () => answerBtnOnClick());
-const answerBtnOnClick = () => {
-  answerBtn.classList.add("disable");
-  (answer.style.cssText = "opacity: 0; transition: all, 0.2s"),
-    setTimeout(() => (answer.textContent = answerAndCoin.answer), 200),
-    setTimeout(
-      () => (answer.style.cssText = "opacity: 1; transition: all, 0.3s"),
-      205
-    );
-  nextBtn.classList.remove("disable");
-};
 const cardOpen = (el) => {
+  qTextWrap.classList.remove("answer-check");
   mainBoard.classList.remove("visible");
   setTimeout(() => {
     mainBoard.classList.add("invisible");
@@ -182,11 +250,12 @@ const cardOpen = (el) => {
   setTimeout(() => {
     questWindow.classList.add("visible");
   }, 222);
-  answer.textContent = "Верный ответ";
-  answerBtn.classList.add("disable");
+  // answer.textContent = "Верный ответ";
+  // answerBtn.classList.add("disable");
   setTimeout(() => (el.style.cssText = "display: none"), 403);
   let themeIndex = 0;
   let elNum = 0;
+  let quest = 0;
   if ([...firstTheme].includes(el)) {
     themeIndex = questions.firstTheme;
     elNum = [...firstTheme].indexOf(el);
@@ -207,46 +276,82 @@ const cardOpen = (el) => {
     themeIndex = questions.fifthTheme;
     elNum = [...fifthTheme].indexOf(el);
   }
-  const iQSet = {
-    name: themeIndex.name,
-    num: themeIndex.questionsNum[elNum],
-    key: themeIndex.key,
-    queText: themeIndex.questionsText[elNum],
-    answer: themeIndex.answers[elNum],
-    coins: el.getAttribute("data-score"),
-  };
-  if (iQSet.queText == "bag") {
-    answerAndCoin.answer = bagAnswer.textContent;
+
+  if (elNum == 0) {
+    quest = themeIndex.firstQ;
+  }
+  if (elNum == 1) {
+    quest = themeIndex.secQ;
+  }
+  if (elNum == 2) {
+    quest = themeIndex.thrdQ;
+  }
+  if (elNum == 3) {
+    quest = themeIndex.frthQ;
+  }
+  if (elNum == 4) {
+    quest = themeIndex.fftQ;
+  }
+
+  iQSet.name = themeIndex.name;
+  iQSet.num = questions.questionsNum[elNum];
+  iQSet.key = themeIndex.key;
+  iQSet.queText = quest.text;
+  iQSet.answer = quest.answer;
+  iQSet.type = quest.type;
+  iQSet.bag = quest.bag;
+  iQSet.nameContent = quest.nameContent;
+  iQSet.coins = el.getAttribute("data-score");
+
+  if (iQSet.type == "img" || "") {
+    audioQ();
+  } else {
+    console.log(iQSet.type);
+  }
+  question.textContent = iQSet.num + ". Категория: " + iQSet.name;
+
+  answerAndCoin.answer = iQSet.answer;
+  answerAndCoin.coin = iQSet.coins;
+  qText.textContent = iQSet.queText;
+  if (iQSet.type == "img") {
+    addsImg.src = "assets/img/" + iQSet.nameContent;
+    qTextContent.insertAdjacentElement("afterbegin", addsImg);
+  }
+  if (iQSet.type == "vid") {
+    addsVid.src = iQSet.nameContent;
+    qTextContent.insertAdjacentElement("afterbegin", addsVid);
+  }
+  if (iQSet.bag == true) {
     answerAndCoin.coin = 1000;
     question.textContent = "Хер в мешке за 1000$!";
-    qText.textContent = "";
-    bagWindow.classList.remove("invisible");
   } else {
-    question.textContent = iQSet.num + ". Категория: " + iQSet.name;
-    titles[themeIndex.key].classList.add("title_active");
-    titles[themeIndex.key].textContent = iQSet.name;
-    answerAndCoin.answer = iQSet.answer;
-    answerAndCoin.coin = iQSet.coins;
-    qText.textContent = iQSet.queText;
-    const showContent = () => {
-      let temp = document.getElementsByTagName("template")[iQSet.key];
-      let clon = temp.content.cloneNode(true);
-      qTextContent.append(clon);
-      qTextContent
-        .getElementsByClassName("js-quest-content")
-        [elNum].classList.remove("invisible");
-      let content = [...qTextContent.querySelectorAll(".js-quest-content")];
-      content.forEach((el) => {
-        if (el.classList.contains("invisible")) {
-          el.remove();
-        }
-      });
-    };
-    showContent();
+    setTimeout(() => {
+      titles[themeIndex.key].textContent = iQSet.name;
+    }, 300);
   }
   countFunc();
 };
+answerBtn2.addEventListener("click", () => {
+  if (qTextWrap.classList.contains("answer-check")) {
+    if (qText.textContent == iQSet.queText) {
+      qText.textContent = iQSet.answer;
+      answerBtn2.textContent = "Показать вопрос";
+    } else {
+      qText.textContent = iQSet.queText;
+      answerBtn2.textContent = "Показать правильный ответ";
+    }
+  }
+});
 const cardClose = () => {
+  document.activeElement.blur();
+  if (audioQu.volume > 0.6) {
+    clearInterval(vl);
+  }
+  if (openCards < 25) {
+    openCards++;
+  } else {
+    alert("GAME OVER!");
+  }
   questWindow.classList.remove("visible");
   setTimeout(() => {
     questWindow.classList.add("invisible");
@@ -263,16 +368,18 @@ const cardClose = () => {
   });
   answerBoard.forEach((commands) => {
     commands.classList.add("disable");
+    commands.blur();
   });
+  qTextWrap.classList.remove("answer-check");
   nextBtn.classList.add("disable");
   replacer();
-  bag();
   countdown.style.cssText = "color: #fbed56";
+  answerBtn2.textContent = "Показать правильный ответ";
 };
 answersCorrect.forEach((el) => {
   el.addEventListener("click", () => {
     answerCorrectFunc(el);
-    console.log(el);
+    clearInterval(vl);
   });
 });
 answersInCorrect.forEach((el) => {
@@ -281,23 +388,33 @@ answersInCorrect.forEach((el) => {
   });
 });
 const answerCorrectFunc = (el) => {
-  let answersTeamNum = answersCorrect.indexOf(el);
+  correctAnswer.load();
+  correctAnswer.play();
+  answersTeamNum = answersCorrect.indexOf(el);
   teamScore[answersTeamNum].textContent =
     Number(teamScore[answersTeamNum].textContent) + Number(answerAndCoin.coin);
 
   cardClose();
 };
+let answersTeamNum = "answersTeamNum";
 const answerInCorrectFunc = (el) => {
-  let answersTeamNum = answersInCorrect.indexOf(el);
+  inCorrectAnswer.load();
+  inCorrectAnswer.play();
+  answersTeamNum = answersInCorrect.indexOf(el);
   teamScore[answersTeamNum].textContent =
     Number(teamScore[answersTeamNum].textContent) - Number(answerAndCoin.coin);
 };
 
 let rows = [firstTheme, secondTheme, thirdTheme, fourthTheme, fifthTheme];
+let openCards = 0;
 rows.forEach((themes) => {
   themes.forEach((el) => {
     el.addEventListener("click", () => {
-      cardOpen(el);
+      el.classList.add("flash");
+      setTimeout(() => cardOpen(el), 200);
+      audioClick.load();
+      audioClick.play();
+      console.log(openCards);
     });
   });
 });

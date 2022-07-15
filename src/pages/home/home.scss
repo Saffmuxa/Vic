@@ -3,26 +3,50 @@
 .title {
   margin: 0 auto;
   grid-row: 1/2;
+  line-height: calc(2vw + 2vh + 1vmin);
+}
+.to-home:visited {
+  color: $mainFontColorActive;
 }
 .title-form {
   grid-row: 2/3;
+  row-gap: 1vh;
+  display: flex;
+  flex-direction: column;
   // max-width: 500px;
 }
 .main-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 100vh;
+  min-height: 500px;
   padding: 8px 5px;
   row-gap: 5vh;
+  z-index: 1;
+
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url("../../assets/images/back.jpg");
+  background-repeat: repeat;
+  background-position: bottom;
+  // background-image: url("../../assets/images/back.jpg");
+  // background-repeat: repeat;
+  // background-size: 30%;
+  // opacity: 0.5;
 }
+
 .wrapp {
+  box-shadow: 0px 0px 20px 20px hsl(0deg 0% 100% / 100%);
   transition: all 400ms;
   width: 95vw;
   margin: 0px auto;
   display: flex;
   flex-direction: column;
   row-gap: 5vh;
+  background-color: #fff;
 }
 .main-menu {
   font-size: 40px;
@@ -35,10 +59,26 @@
   color: $purple;
   padding: 0px 11px;
   opacity: 0.8;
+  // position: absolute;
+  animation: anims 4s ease-in-out infinite;
+}
+@keyframes anims {
+  25% {
+    transform: rotate3d(0, 0, 1, 2deg) scale(0.9);
+  }
+  50% {
+    transform: rotate3d(0, 0, 1, 0deg) scale(1);
+  }
+  75% {
+    transform: rotate3d(0, 0, 1, -2deg) scale(0.9);
+  }
+  100% {
+    transform: rotate3d(0, 0, 1, 0deg) scale(1);
+  }
 }
 .main-menu:hover {
   opacity: 1;
-  transform: scale(1.1);
+  // transform: scale(1.1);
   transition: all 300ms;
 }
 .btn-home {
@@ -99,9 +139,10 @@ ol {
   line-height: 1rem;
   padding-left: 12px;
 }
-@media all and (min-width: 480px) {
+@media all and (max-width: 480px) {
   .wrapp {
-    width: 87vw;
+    width: 90vw;
+    min-width: 284px;
   }
   .tips {
     font-size: 0.85rem;
@@ -109,66 +150,55 @@ ol {
   }
   .rules {
     width: 95vw;
+    min-width: 284px;
     color: rgba(31, 32, 65, 0.5);
   }
 }
-@media all and (min-width: 640px) {
-  .wrapp {
-    width: 72vw;
-  }
+@media all and (min-width: 480px) {
   .tips {
     font-size: 0.95rem;
     line-height: 1.3rem;
   }
   .rules {
-    width: 90vw;
+    width: 95vw;
   }
 }
 @media all and (min-width: 800px) {
   .wrapp {
-    width: 57vw;
+    width: 720px;
   }
   .tips {
     font-size: 1.05rem;
     line-height: 1.4rem;
   }
   .rules {
-    width: 80vw;
+    width: 85vw;
   }
 }
 @media all and (min-width: 1024px) {
-  .wrapp {
-    width: 42vw;
-  }
   .tips {
     font-size: 1.15rem;
     line-height: 1.5rem;
   }
   .rules {
-    width: 70vw;
+    width: 75vw;
   }
 }
 @media all and (min-width: 1280px) {
-  .wrapp {
-    width: 32vw;
-  }
   .tips {
     font-size: 1.2rem;
     line-height: 1.6rem;
   }
   .rules {
-    width: 60vw;
+    width: 70vw;
   }
 }
 @media all and (min-width: 1440px) {
-  .wrapp {
-    width: 28vw;
-  }
   .tips {
     font-size: 1.25rem;
     line-height: 1.8rem;
   }
   .rules {
-    width: 50vw;
+    width: 60vw;
   }
 }

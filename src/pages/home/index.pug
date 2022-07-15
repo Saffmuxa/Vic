@@ -10,7 +10,8 @@ block content
 
   main.main-content
     .wrapp
-      h1.title Какая то игра!
+      h1.title
+        a.to-home(href='index.html') Какая то игра!
       .title-form
 
         .btns
@@ -22,15 +23,18 @@ block content
             .inputs
             input.main-menu_group1-name(type="text", name="name" placeholder='Введите название команды' required)
             //- input.main-menu_group1-name(name="name" placeholder='Введите название второй команды' required)
-            input.main-menu_group1-timer(name="time" placeholder='Время на вопрос (сек)' type='number' required)
+            input.main-menu_group1-timer(name="time" placeholder='Время на вопрос (сек)' type='number' max="60" min="4" required)
             button(type="submit").main-menu.js-submit Start Game
-            
+    audio.js-menu-song(loop autoplay)
+      source(src="assets/audio/menu.mp3" type="audio/mp3")
     .rules  
       h3 Немного подсказок:
       ol.tips(type="a")
-        li При выборе вопроса - открывается наименование выбранной категории
+        li В данный момент приложение в разработке, пусть будет a.0.8
+        li Все вопросы в в темах повторяются. Имеется bag вопрос, video, image
+        li Категории заранее скрыты. Наименование выбранной категории открывается при выборе вопроса  
         li После прочтения вопроса необходимо дать ответ как можно быстрее
         li Если команда отвечает неверно, очки отнимаются и дается возможность ответить другим командам 
-        li Команды могут не отвечать после неверного ответа оппонента 
+        li Команды могут не отвечать после неверного ответа оппонентов 
         li Активация кнопок "правильного" и "неправильного" ответов происходит после истечения времени, нажатию на Space или щелчка по самому таймеру
         

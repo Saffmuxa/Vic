@@ -15,21 +15,27 @@ console.log("!>> App is loaded.");
 
 // sessionStorage.setItem
 
+const audioClck = new Audio();
+audioClck.preload = "auto";
+audioClck.src = "assets/audio/click.mp3";
+const wrong = new Audio();
+wrong.preload = "auto";
+wrong.src = "assets/audio/wrong.mp3";
+
 let counter = 1;
 const output = document.querySelector(".output");
 const formGame = document.querySelector(".js-start-game");
 let formFields = formGame.elements;
 const submitBtn = document.querySelector(".js-submit");
-console.log(submitBtn);
-
 output.textContent = words(counter, wordsDeclensions);
-console.log(wordsDeclensions);
-
 let btns = document.querySelectorAll(".btn-home");
-
+let input = "input";
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    let input = document.createElement("input");
+    audioClck.load();
+    audioClck.play();
+
+    input = document.createElement("input");
     input.type = "text";
     input.className = "main-menu_group1-name";
     input.name = "name";
@@ -74,24 +80,30 @@ btns.forEach((btn) => {
   //   console.log(element.name, element.value);
   // });
 });
+let namesArr = [];
+// let formFields = "formFields";
 submitBtn.addEventListener("click", (event) => {
+  wrong.load();
+  setTimeout(() => wrong.play(), 200);
   // event.preventDefault();
   // localStorage.setItem(array, JSON.stringify(array));
   // array = JSON.parse(localStorage.getItem("array"));
 
   sessionStorage.clear();
-  let formFields = formGame.elements;
-  let namesArr = [];
+  // formFields = formGame.elements;
+
+  namesArr = [];
   Array.prototype.forEach.call(formFields, (element) => {
     if (element.name == "name") {
       namesArr.push(element.value);
-      console.log(namesArr);
     }
+
     if (element.name == "time") {
       sessionStorage.setItem("timer", element.value);
     }
   });
   sessionStorage.setItem("names", JSON.stringify(namesArr));
+  console.log(namesArr);
   // namesArr = JSON.parse(localStorage.getItem("namesArr"));
   // let i = 0;
   // Array.prototype.forEach.call(formFields, (element) => {

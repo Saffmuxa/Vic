@@ -5,7 +5,6 @@ append style
 
 append script
   script(src=require('./game.js'))
-  
 
 block content
   -const column = [100, 200, 300, 400, 500];
@@ -15,10 +14,11 @@ block content
       .board-wrapper.js-board.visible
         .board
           .main-board
-            h2 Какая то игра
+            h2 
+              a.to-home(href='index.html') Какая то игра!
             .game-grid
               .game-column
-                .title.js-title
+                .title.js-title ?
                 .question-button-wrapper
                   .question-button(data-score=column[0], qnumber=1).js-firstRow
                     span.dollar $
@@ -40,7 +40,7 @@ block content
                     span.dollar $
                     =column[4]
               .game-column
-                .title.js-title
+                .title.js-title ?
                 .question-button-wrapper
                   .question-button(data-score=column[0]).js-secondRow
                     span.dollar $
@@ -62,7 +62,7 @@ block content
                     span.dollar $
                     =column[4]
               .game-column
-                .title.js-title
+                .title.js-title ?
                 .question-button-wrapper
                   .question-button(data-score=column[0]).js-thirdRow
                     span.dollar $
@@ -84,7 +84,7 @@ block content
                     span.dollar $
                     =column[4]
               .game-column
-                .title.js-title
+                .title.js-title ?
                 .question-button-wrapper
                   .question-button(data-score=column[0]).js-fourthRow
                     span.dollar $
@@ -106,7 +106,7 @@ block content
                     span.dollar $
                     =column[4]
               .game-column
-                .title.js-title.js-title
+                .title.js-title ?
                 .question-button-wrapper
                   .question-button(data-score=column[0]).js-fifthRow
                     span.dollar $
@@ -130,73 +130,72 @@ block content
       .questionWindow.js-questionWindow.invisible
         .questionWindow__wrap.js-questionWindow__text-wrap
           h1.question.js-question  
-          .question__text
+          .question__text.js-question__text-wrap
               span.js-question__text 
-          .bag-div.js-bag-div.invisible
-                include ./bag.pug
+              span.answer-btn.js-answer-btn(style="z-index: 5") Показать правильный ответ
           .btns
-            button.questionWindow__vars.quest-btn.js-questionWindow__vars-btn.disable
-              span.js-questionWindow__vars Верный ответ
             button.js-questionWindow__next.next.questionWindow__vars.disable
               span.js-questionWindow__next Далее
 
           
     .teams.js-teams
       include ./time.pug
-  template.js-first-theme__content
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-    div.js-quest-content.invisible
-      video(src="https://doc-10-bc-docs.googleusercontent.com/docs/securesc/6bmlqhpe38ac6id7a9h5esdnkbfjaim3/6l4hfcm2d3lj1c3fe320l0ebkrp81jv1/1656598650000/12892186614617424121/01658595387627454423/0B1lk_563BApdOXZsX2RwSzBxZXc?resourcekey=0-OqVE02Pv-oETWQ3i2uoeLg&e=download&ax=ACxEAsaSrL7nG1qEnGnn-mxzlp8ZOjSE_RJ6DYh38W8adnXoQ75v3FtjnoUFSp7EJdjzCa0iVFH-VsqzMYvslARCVy7az_O3l8u5YWbYk6lvZZkaWEv7kIK2e_7jQvAHTNzEth-cGF5Zv_KT-gqIEcx787MthQEpQzJbASClqK7kC9UD2nDayTPCAbFJ1gK2Rd867KF_10Z-x56KannS2Gl5JBgmBlhf9kuDt7o2_XARkmLsVGKJkbMt8kA5DijEmWjN73Q-bsiEhwapKGxo-MTqPMqdOHCob0xFdzOkwDwcYULEgjD5E_N76mp6bwjZmAYcs1Ox2R8UIRiHmSp_N8CJXxGDWQB0bnf2mrub_W2ATys4R8UB3qAsl9SfNFw-ObocSaONBPys63mWSUZT4fujkPq7SvmMuRt7wobn7wKAZk31JagWjq_W-tdoCMsK5Y3qVp-TONc41u45rLBz3T0CAWS8ItrW16hh4g3lrGAeg1tcjISE9UYvge-O3zsrKRSDx_b-Y1kInPSPLnZhr8FcV0pvmmF9bo3FblHEwQ4gbgsctgmEgRfeJCa5663xaxSJNgxvDA-fcx7plZOSFZRA9OcX9jvGt1_8n5fM6HP81WNWbLgTb1frKLrqgKvH0OyUTfhXyJ2R9TLUoIbdADjmy-qMSwStsyIWxNb8jRRHRh-Zh5aMHiEJNgV0pjfubEfssTbmrsKjybQMJBuKXDDcXkgJxRXgFmIZTdD4G4-iWA&uuid=b2cc8398-ae13-43f9-9111-20e45bec665a&authuser=0&nonce=vpetgiiu45fc0&user=01658595387627454423&hash=b5aoojq7i7m6u5h0llldf5fobv370ucd"  controls) 
-    div.js-quest-content.invisible
-      img(src=require('~Images/favicon.ico'))
-    div.js-quest-content.invisible
-      audio(src="https://doc-0c-2c-docs.googleusercontent.com/docs/securesc/6bmlqhpe38ac6id7a9h5esdnkbfjaim3/ggl28iuje0c9p6gahnt52ljlupk8bhs3/1656598050000/01658595387627454423/01658595387627454423/0ByiM7RZVfAWnY242SjV6c2MyZlk?e=download&ax=ACxEAsZ7ur5Bk2zBnMGtnecaijWqWIrDu6Kl0ksVP68WScPNGJX-1gqhmJzYwFlPzXRv6pUsAyGQmafYSvDRIjDmPKVWVPkmcamZS3SQ-q463C6eIqzPZ9eFsLQ_j0G8I6bqGBZ1f1yTusgAefwe6haKuH6Z64ipX_F4SL9YWRYKc4csTJuBs4e_YDbJPRkxbOGf_E3evFuUr3Kb8M2b_U2Z7r5XQGF-_BzP-gLjflA7k6h7KDUBNXcDRDqUqZhTPnHHgj8kBy1OkGDJGuQor3ZpnBLigQBefLAG9Y52Noi_cLz78Ppfw9sFyi2alZYrICnRZk2Q8W1Dq8z7e0zr5cjPONqYjaoOEX-nyQCPFE3NrYk3wLob7Q_QWX1j-EnwuUBq_cg6oe1ONifZyuD3f4JGEIC9nue8Jw7dyMVwbKH_ZsfGGYL-yEpRwYtLIYNLg7XXbOhgCB7NRTmOf3S551aayReI7396Z3BZNfQMUPuJKTftPrDS-xpk-xpKWD7jmfZ9crEIf312R_5TkpeczNAvTRA-ywXJYZb2QTZBjv8KEeqi7TRTuQ4tMmF0aW5xjoewqChYm0dBN3Ai31O7DEGHFSYIM8XxoMUMZA9s5G4yBlGwECJecExxBSpDZaZ3TPyiwm70QkukvUyiIS6KPuO8vjfsqANSo9lxmnksbAw8AObVJ7Q1C7oQOQHSOUU9dnpjN7_hr_tXq03Vu33khdbc43Fx45xiTWV8Y23TcfsEEg&uuid=7564d80f-d2a6-4317-8e37-8d9e765402b2&authuser=0&resourcekey=0-Exhjl55espEn4t6KmauYPQ"  controls)
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-  template.js-second-theme__content 
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-    div.js-quest-content.invisible
-      img(src=require('~Images/favicon.ico'))
-    div.js-quest-content.invisible
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-  template.js-third-theme__content 
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-    div.js-quest-content.invisible
-      //- video(src=require('~Videos/1.mp4'),  controls) 
-    div.js-quest-content.invisible
-      img(src=require('~Images/favicon.ico'))
-    div.js-quest-content.invisible
-      //- audio(src=require('~Audio/1.wav')  controls)
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-  template.js-fourth-theme__content 
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-    div.js-quest-content.invisible
-      //- video(src=require('~Videos/1.mp4'),  controls) 
-    div.js-quest-content.invisible
-      img(src=require('~Images/favicon.ico'))
-    div.js-quest-content.invisible
-      //- audio(src=require('~Audio/1.wav')  controls)
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-  template.js-fifth-theme__content 
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
-    div.js-quest-content.invisible
-      //- video(src=require('~Videos/1.mp4'),  controls) 
-    div.js-quest-content.invisible
-      img(src=require('~Images/favicon.ico'))
-    div.js-quest-content.invisible
-      //- audio(src=require('~Audio/1.wav')  controls)
-    div.js-quest-content.invisible
-      img(src=require('~Images/1.png'))
+ 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //-   div.js-quest-content.invisible
+  //-     iframe(src="https://www.youtube.com/embed/2Ia9E-7SaXI?amp&autoplay=1&start=1" title="Yo" frameborder="0" allow="accelerometer; autoplay; ")
+  //-       //- video(src="https://doc-10-bc-docs.googleusercontent.com/docs/securesc/6bmlqhpe38ac6id7a9h5esdnkbfjaim3/6l4hfcm2d3lj1c3fe320l0ebkrp81jv1/1656598650000/12892186614617424121/01658595387627454423/0B1lk_563BApdOXZsX2RwSzBxZXc?resourcekey=0-OqVE02Pv-oETWQ3i2uoeLg&e=download&ax=ACxEAsaSrL7nG1qEnGnn-mxzlp8ZOjSE_RJ6DYh38W8adnXoQ75v3FtjnoUFSp7EJdjzCa0iVFH-VsqzMYvslARCVy7az_O3l8u5YWbYk6lvZZkaWEv7kIK2e_7jQvAHTNzEth-cGF5Zv_KT-gqIEcx787MthQEpQzJbASClqK7kC9UD2nDayTPCAbFJ1gK2Rd867KF_10Z-x56KannS2Gl5JBgmBlhf9kuDt7o2_XARkmLsVGKJkbMt8kA5DijEmWjN73Q-bsiEhwapKGxo-MTqPMqdOHCob0xFdzOkwDwcYULEgjD5E_N76mp6bwjZmAYcs1Ox2R8UIRiHmSp_N8CJXxGDWQB0bnf2mrub_W2ATys4R8UB3qAsl9SfNFw-ObocSaONBPys63mWSUZT4fujkPq7SvmMuRt7wobn7wKAZk31JagWjq_W-tdoCMsK5Y3qVp-TONc41u45rLBz3T0CAWS8ItrW16hh4g3lrGAeg1tcjISE9UYvge-O3zsrKRSDx_b-Y1kInPSPLnZhr8FcV0pvmmF9bo3FblHEwQ4gbgsctgmEgRfeJCa5663xaxSJNgxvDA-fcx7plZOSFZRA9OcX9jvGt1_8n5fM6HP81WNWbLgTb1frKLrqgKvH0OyUTfhXyJ2R9TLUoIbdADjmy-qMSwStsyIWxNb8jRRHRh-Zh5aMHiEJNgV0pjfubEfssTbmrsKjybQMJBuKXDDcXkgJxRXgFmIZTdD4G4-iWA&uuid=b2cc8398-ae13-43f9-9111-20e45bec665a&authuser=0&nonce=vpetgiiu45fc0&user=01658595387627454423&hash=b5aoojq7i7m6u5h0llldf5fobv370ucd"  controls) 
+  //-   div.js-quest-content.invisible
+  //-     img(src="https://crosti.ru/patterns/00/21/c8/1bc190b256/picture.jpg")
+
+  //-   div.js-quest-content.invisible
+  //-     iframe(frameborder="0" style="border:none;width:100%;height:180px;" width="100%" height="180" src="https://music.yandex.ru/iframe/#track/44093414/1581808")
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //- template.js-second-theme__content 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/favicon.ico'))
+  //-   div.js-quest-content.invisible
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //- template.js-third-theme__content 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //-   div.js-quest-content.invisible
+  //-     //- video(src=require('~Videos/1.mp4'),  controls) 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/favicon.ico'))
+  //-   div.js-quest-content.invisible
+  //-     //- audio(src=require('~Audio/1.wav')  controls)
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //- template.js-fourth-theme__content 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //-   div.js-quest-content.invisible
+  //-     //- video(src=require('~Videos/1.mp4'),  controls) 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/favicon.ico'))
+  //-   div.js-quest-content.invisible
+  //-     //- audio(src=require('~Audio/1.wav')  controls)
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //- template.js-fifth-theme__content 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
+  //-   div.js-quest-content.invisible
+  //-     //- video(src=require('~Videos/1.mp4'),  controls) 
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/favicon.ico'))
+  //-   div.js-quest-content.invisible
+  //-     //- audio(src=require('~Audio/1.wav')  controls)
+  //-   div.js-quest-content.invisible
+  //-     img(src=require('~Images/1.png'))
   //- template.js-first-theme__content
   //-     img(src=require('~Images/favicon.ico'))
   //- template.js-second-theme__content 
